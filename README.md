@@ -15,10 +15,11 @@ specific rules.
 
 ## How
 
-1. **Install GitHub Copilot Extension**  
+1. **Install GitHub Copilot Extensions**  
    - Open VS Code.
    - Go to the Extensions view (`Ctrl+Shift+X`).
    - Search for "GitHub Copilot" and install the official extension.
+   - (Optional) Install the "GitHub Copilot Chat" extension for conversational AI assistance within VS Code.
 
 2. **Sign In to GitHub**  
    - After installation, you'll be prompted to sign in with your GitHub account.
@@ -33,13 +34,10 @@ specific rules.
    - Create a file named `copilot-instructions.md` inside the `.github` directory.
    - Add project-specific instructions, workflows, coding styles, or any context you want Copilot to consider.
 
-5. **(Optional) Use Copilot Chat**  
-   - Install the "GitHub Copilot Chat" extension for conversational AI assistance within VS Code.
-
-6. **Restart VS Code (if needed)**  
+5. **Restart VS Code (if needed)**  
    - Sometimes a restart is required for all features to activate.
 
-7. **Start Coding**  
+6. **Start Coding**  
    - Copilot will now use your `copilot-instructions.md` (and other context) to provide more relevant suggestions as you code.
 
 > **Tip:** Keep your `copilot-instructions.md` updated as your project evolves for best results.
