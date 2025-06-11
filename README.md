@@ -65,3 +65,12 @@ specific rules.
 - Use clear and concise language in your instructions to ensure Copilot
   understands your requirements.
   
+## Searching for More Instructions
+
+If you're looking for more examples of `copilot-instructions.md` files, you can
+search GitHub repositories using the following query:
+
+- Github [repositories](https://github.com/search?q=copilot-instructions.md)
+  with `copilot-instructions.md`, once you get to the results, you can use the
+  left sidebar to change the search to code and filter by language or other
+  criteria.
