@@ -53,7 +53,7 @@ specific rules.
    - Copilot will now use your `copilot-instructions.md` (and other context) to
      provide more relevant suggestions as you code.  I have found that
      mentioning the instructions to Copilot in the first prompt of a session or
-     if you're updated your instructions may be necessary.  You can also use the
+     if you've updated your instructions may be necessary.  You can also use the
      Add Context and pick copilot-instructions.md to remind it of the context.
 
 ## Tips

@@ -10,7 +10,7 @@ maintainability.
 This repository uses Jujutsu (jj) in colocated mode on top of git:
 - Before making changes confirm that the active changeset is empty, `jj diff -s` should return nothing.
 - If the active revest is not empty, create a new revset with `jj new`
-- Add a description to the revset specifying the author as copilot: `jj new -m "description" --author="copilot <copilot@jgaines.com>"`
+- Add a description to the revset specifying the author as copilot: `jj desc -m "description" --author="copilot <copilot@jgaines.com>"`
 
 
 ## General Guidelines
