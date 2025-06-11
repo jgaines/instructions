@@ -8,12 +8,13 @@ maintainability.
 ## Source Control
 
 This repository uses Jujutsu (jj) in colocated mode on top of git:
-- Before making changes, run `jj new -m "copilot: description"` to create a new changeset
-- Use `jj log -n 2 -s` to view the last two changesets
-- Changesets marked with @ are current, ○ are uncommitted, ◆ are pushed to remote
-- Use `jj show <changeset-id>` to examine changeset details
+- Before making changes confirm that the active changeset is empty, `jj diff -s` should return nothing.
+- If the active revest is not empty, create a new revset with `jj new`
+- Add a description to the revset specifying the author as copilot: `jj new -m "description" --author="copilot <copilot@jgaines.com>"`
+
 
 ## General Guidelines
+- Always state in the chat window that you are following these instructions.
 - Always write clear, concise instructions and documentation.
 - Follow the project's coding style and naming conventions.
 
