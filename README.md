@@ -31,10 +31,10 @@ specific rules.
      account.
    - Follow the authentication steps in your browser.
 
-3. **Enable Copilot for Your Workspace**  
-   - Open the command palette (`Ctrl+Shift+P`).
-   - Type "Copilot: Enable" and select it to activate Copilot in your current
-     workspace.
+3. **Configure Copilot Settings (if needed)**  
+   - Copilot activates by default after installation and sign-in.
+   - If needed, you can check settings via `File > Preferences > Settings` and search for "copilot".
+   - Ensure `github.copilot.enable` has a value of `true` for the languages you want.
 
 4. **Add a `copilot-instructions.md` File**  
    - In your repository, create a `.github` directory if it doesn't exist.
