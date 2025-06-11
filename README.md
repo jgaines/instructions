@@ -59,7 +59,7 @@ specific rules.
 ## Tips
 
 - Embed a validation step in your workflow to ensure that the instructions
-  provided in `copilot-instructions.md` are being used effectively.  My instructions always require a new jujutsu changeset be created prior to any editing.
+  provided in `copilot-instructions.md` work effectively.
 - Keep your `copilot-instructions.md` updated as your project evolves for best
   results.
 - Use clear and concise language in your instructions to ensure Copilot
