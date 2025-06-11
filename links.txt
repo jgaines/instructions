@@ -1,0 +1,7 @@
+Just some links that started me off thinking about this repo.  They will
+eventually be incorporated into the main readme.  Since my intent is not to
+generate a curated list, perhaps just presenting these searches would
+be more sensible than listing out the other lists one by one.
+
+Search: https://github.com/search?q=copilot-instructions.md&type=repositories
+

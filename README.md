@@ -34,11 +34,15 @@ specific rules.
 3. **Configure Copilot Settings (if needed)**  
    - Copilot activates by default after installation and sign-in.
    - If needed, you can check settings via `File > Preferences > Settings` and search for "copilot".
-   - Ensure `github.copilot.enable` has a value of `true` for the languages you want.
+   - Ensure `github.copilot.enable` has a value of `true` for the languages you
+     want.
+   - Verify `github.copilot.chat.codeGeneration.useInstructionFiles` has a value
+     of `true` to use your `.github/copilot-instructions.md` file.
 
 4. **Add a `copilot-instructions.md` File**  
    - In your repository, create a `.github` directory if it doesn't exist.
-   - Create a file named `copilot-instructions.md` inside the `.github` directory.
+   - Create a file named `copilot-instructions.md` inside the `.github`
+     directory.
    - Add project-specific instructions, workflows, coding styles, or any context
      you want Copilot to consider.
 
@@ -47,7 +51,17 @@ specific rules.
 
 6. **Start Coding**  
    - Copilot will now use your `copilot-instructions.md` (and other context) to
-     provide more relevant suggestions as you code.
+     provide more relevant suggestions as you code.  I have found that
+     mentioning the instructions to Copilot in the first prompt of a session or
+     if you're updated your instructions may be necessary.  You can also use the
+     Add Context and pick copilot-instructions.md to remind it of the context.
 
-> **Tip:** Keep your `copilot-instructions.md` updated as your project evolves
-> for best results.
+## Tips
+
+- Embed a validation step in your workflow to ensure that the instructions
+  provided in `copilot-instructions.md` are being used effectively.  My instructions always require a new jujutsu changeset be created prior to any editing.
+- Keep your `copilot-instructions.md` updated as your project evolves for best
+  results.
+- Use clear and concise language in your instructions to ensure Copilot
+  understands your requirements.
+  
