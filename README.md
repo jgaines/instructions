@@ -2,7 +2,9 @@
 
 A meta-collection of my own instruction files for copilot as well as links to
 other collection I've run into here and there.  I'm doing this to track my own
-exploration of copilot-instructions.md files.
+exploration of copilot-instructions.md files.  Disclaimer: I am not an expert
+with agent mode instructions yet and you find some files in here that may be
+total garbage.
 
 The documentation and instruction files target Github Copilot as that's what I'm
 using.  The content of the instruction files should be applicable to most chat
