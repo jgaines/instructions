@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Script to gather copilot-instructions.md files from other repositories
+# Following project instructions for Jujutsu workflow
+
+set -e
+
+echo "Gathering copilot-instructions.md files from other repositories..."
+
+# Check if active changeset is empty
+if [[ -n $(jj diff -s) ]]; then
+    echo "Active changeset is not empty, creating new changeset..."
+    jj new
+fi
+
+# Create the 'from' directory if it doesn't exist
+mkdir -p from
+
+# Find all copilot-instructions.md files in .github directories
+echo "Searching for copilot-instructions.md files..."
+files=$(fd -H copilot-instructions.md ~/git ~/projects | grep .github || true)
+
+if [[ -z "$files" ]]; then
+    echo "No copilot-instructions.md files found in ~/git or ~/projects"
+    exit 0
+fi
+
+echo "Found files:"
+echo "$files"
+echo
+
+# Process each file
+while IFS= read -r file; do
+    if [[ -n "$file" ]]; then
+        # Extract repository name from path
+        # Remove the .github/copilot-instructions.md part and get the last directory
+        repo_path=$(dirname "$(dirname "$file")")
+        repo_name=$(basename "$repo_path")
+        
+        echo "Processing: $file"
+        echo "Repository: $repo_name"
+        
+        # Create directory for this repo
+        target_dir="from/$repo_name"
+        mkdir -p "$target_dir"
+        
+        # Copy the file
+        cp "$file" "$target_dir/copilot-instructions.md"
+        
+        echo "Copied to: $target_dir/copilot-instructions.md"
+        echo
+    fi
+done <<< "$files"
+
+# Set description for the changeset
+jj desc -m "Update instructions with gather script" --author="copilot <copilot@jgaines.com>"
+
+echo "Gathering complete! Files copied to 'from' directory organized by repository name."
+echo "Changeset created with description: 'Update instructions with gather script'"
