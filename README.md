@@ -17,9 +17,18 @@ about your repository such as the workflow your team follows, tools and other
 project specific details such as coding style, frameworks used or project
 specific rules.
 
+## Writing Effective Prompts
+
+Rather than repeating other posts here, I'll link a few resources that I've run across.
+
+- [19 Formulas and Prompt Structures for ChatGPT](https://fvivas.com/en/19-formulas-and-prompt-structures-for-chatgpt/)
+  by Fernando Vivas.
+- [Effective Prompts for AI: The Essentials](https://mitsloanedtech.mit.edu/ai/basics/effective-prompts/)
+  by MIT Sloan Teaching & Learning Technologies.
+
 ## How to Get Started with GitHub Copilot
 
-1. **Install GitHub Copilot Extensions**  
+1. **Install GitHub Copilot Extensions**
    - Open VS Code.
    - Go to the Extensions view (`Ctrl+Shift+X`).
    - Search for "GitHub Copilot" and install the official extension.
@@ -28,12 +37,12 @@ specific rules.
      mode](https://code.visualstudio.com/blogs/2023/11/15/agents-public-preview)
      to allow you to interact with AI-powered agents directly in your editor.
 
-2. **Sign In to GitHub**  
+2. **Sign In to GitHub**
    - After installation, the system will prompt you to sign in with your GitHub
      account.
    - Follow the authentication steps in your browser.
 
-3. **Configure Copilot Settings (if needed)**  
+3. **Configure Copilot Settings (if needed)**
    - Copilot activates by default after installation and sign-in.
    - If needed, you can check settings via `File > Preferences > Settings` and search for "copilot".
    - Ensure `github.copilot.enable` has a value of `true` for the languages you
@@ -41,17 +50,17 @@ specific rules.
    - Verify `github.copilot.chat.codeGeneration.useInstructionFiles` has a value
      of `true` to use your `.github/copilot-instructions.md` file.
 
-4. **Add a `copilot-instructions.md` File**  
+4. **Add a `copilot-instructions.md` File**
    - In your repository, create a `.github` directory if it doesn't exist.
    - Create a file named `copilot-instructions.md` inside the `.github`
      directory.
    - Add project-specific instructions, workflows, coding styles, or any context
      you want Copilot to consider.
 
-5. **Restart VS Code (if needed)**  
+5. **Restart VS Code (if needed)**
    - Sometimes a restart may be necessary for all features to activate.
 
-6. **Start Coding**  
+6. **Start Coding**
    - Copilot will now use your `copilot-instructions.md` (and other context) to
      provide more relevant suggestions as you code.  I have found that
      mentioning the instructions to Copilot in the first prompt of a session or
@@ -66,7 +75,7 @@ specific rules.
   results.
 - Use clear and concise language in your instructions to ensure Copilot
   understands your requirements.
-  
+
 ## Searching for More Instructions
 
 If you're looking for more examples of `copilot-instructions.md` files, you can
