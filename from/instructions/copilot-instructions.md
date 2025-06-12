@@ -12,7 +12,6 @@ This repository uses Jujutsu (jj) in colocated mode on top of git:
 - If the active revest is not empty, create a new revset with `jj new`
 - Add a description to the revset specifying the author as copilot: `jj desc -m "description" --author="copilot <copilot@jgaines.com>"`
 
-
 ## General Guidelines
 - Always state in the chat window that you are following these instructions.
 - Always write clear, concise instructions and documentation.
