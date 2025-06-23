@@ -52,8 +52,11 @@ while IFS= read -r file; do
     fi
 done <<< "$files"
 
-# Set description for the revset
-jj desc -m "Update instructions with gather script" --author="copilot <copilot@jgaines.com>"
+# Set description for the revset if it's not empty
+if [[ -n $(jj diff -s) ]]; then
+    jj desc -m "Update instructions with gather script" --author="copilot <copilot@jgaines.com>"
+    echo "revset created with description: 'Update instructions with gather script'"
+fi
 
 echo "Gathering complete! Files copied to 'from' directory organized by repository name."
 echo "revset created with description: 'Update instructions with gather script'"
