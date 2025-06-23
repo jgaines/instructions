@@ -7,9 +7,9 @@ set -e
 
 echo "Gathering copilot-instructions.md files from other repositories..."
 
-# Check if active changeset is empty
+# Check if active revset is empty
 if [[ -n $(jj diff -s) ]]; then
-    echo "Active changeset is not empty, creating new changeset..."
+    echo "Active revset is not empty, creating new revset..."
     jj new
 fi
 
@@ -36,24 +36,24 @@ while IFS= read -r file; do
         # Remove the .github/copilot-instructions.md part and get the last directory
         repo_path=$(dirname "$(dirname "$file")")
         repo_name=$(basename "$repo_path")
-        
+
         echo "Processing: $file"
         echo "Repository: $repo_name"
-        
+
         # Create directory for this repo
         target_dir="from/$repo_name"
         mkdir -p "$target_dir"
-        
+
         # Copy the file
         cp "$file" "$target_dir/copilot-instructions.md"
-        
+
         echo "Copied to: $target_dir/copilot-instructions.md"
         echo
     fi
 done <<< "$files"
 
-# Set description for the changeset
+# Set description for the revset
 jj desc -m "Update instructions with gather script" --author="copilot <copilot@jgaines.com>"
 
 echo "Gathering complete! Files copied to 'from' directory organized by repository name."
-echo "Changeset created with description: 'Update instructions with gather script'"
+echo "revset created with description: 'Update instructions with gather script'"
