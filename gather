@@ -54,9 +54,9 @@ done <<< "$files"
 
 # Set description for the revset if it's not empty
 if [[ -n $(jj diff -s) ]]; then
-    jj desc -m "Update instructions with gather script" --author="copilot <copilot@jgaines.com>"
+    jj desc -m "Update instructions with gather script"
+    echo "Gathering complete! Files copied to 'from' directory organized by repository name."
     echo "revset created with description: 'Update instructions with gather script'"
+else
+    echo "No changes to commit, revset remains empty."
 fi
-
-echo "Gathering complete! Files copied to 'from' directory organized by repository name."
-echo "revset created with description: 'Update instructions with gather script'"
