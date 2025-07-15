@@ -2,13 +2,13 @@
 
 ## CRITICAL: Source Control Protocol
 
-- ALWAYS create a new changeset BEFORE making any changes:
+- ALWAYS create a new revset BEFORE making any changes:
 
    ```bash
    jj new -m "copilot: description of changes"
    ```
 
-- ALWAYS verify the current changeset with:
+- ALWAYS verify the current revset with:
 
    ```bash
    jj log --no-pager
