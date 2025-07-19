@@ -18,7 +18,7 @@ mkdir -p from
 
 # Find all copilot-instructions.md files in .github directories
 echo "Searching for copilot-instructions.md files..."
-files=$(fd -H copilot-instructions.md ~/git ~/projects | grep .github || true)
+files=$(fd -H copilot-instructions.md ~/bin ~/git ~/projects | grep .github || true)
 
 if [[ -z "$files" ]]; then
     echo "No copilot-instructions.md files found in ~/git or ~/projects"
