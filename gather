@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Script to gather copilot-instructions.md files from other repositories
+# Script to gather copilot-instructions.md, GEMINI.md, and AGENTS.md files from other repositories
 # Following project instructions for Jujutsu workflow
 
 set -e
 
-echo "Gathering copilot-instructions.md files from other repositories..."
+echo "Gathering copilot-instructions.md, GEMINI.md, and AGENTS.md files from other repositories..."
 
 # Check if active revset is empty
 if [[ -n $(jj diff -s) ]]; then
@@ -16,41 +16,78 @@ fi
 # Create the 'from' directory if it doesn't exist
 mkdir -p from
 
-# Find all copilot-instructions.md files in .github directories
-echo "Searching for copilot-instructions.md files..."
-files=$(fd -H copilot-instructions.md ~/bin ~/git ~/projects | grep .github || true)
+# Find all target files
+echo "Searching for copilot-instructions.md, GEMINI.md, and AGENTS.md files..."
 
-if [[ -z "$files" ]]; then
-    echo "No copilot-instructions.md files found in ~/git or ~/projects"
+# Search for copilot-instructions.md files in .github directories
+copilot_files=$(fd -H copilot-instructions.md ~/bin ~/git ~/projects | grep .github || true)
+
+# Search for GEMINI.md files anywhere
+gemini_files=$(fd -H GEMINI.md ~/bin ~/git ~/projects || true)
+
+# Search for AGENTS.md files anywhere
+agents_files=$(fd -H AGENTS.md ~/bin ~/git ~/projects || true)
+
+# Combine all files
+all_files=""
+if [[ -n "$copilot_files" ]]; then
+    all_files="$copilot_files"
+fi
+if [[ -n "$gemini_files" ]]; then
+    if [[ -n "$all_files" ]]; then
+        all_files="$all_files"$'\n'"$gemini_files"
+    else
+        all_files="$gemini_files"
+    fi
+fi
+if [[ -n "$agents_files" ]]; then
+    if [[ -n "$all_files" ]]; then
+        all_files="$all_files"$'\n'"$agents_files"
+    else
+        all_files="$agents_files"
+    fi
+fi
+
+if [[ -z "$all_files" ]]; then
+    echo "No target files found in ~/bin, ~/git, or ~/projects"
     exit 0
 fi
 
 echo "Found files:"
-echo "$files"
+echo "$all_files"
 echo
 
 # Process each file
 while IFS= read -r file; do
     if [[ -n "$file" ]]; then
+        # Get the filename
+        filename=$(basename "$file")
+        
         # Extract repository name from path
-        # Remove the .github/copilot-instructions.md part and get the last directory
-        repo_path=$(dirname "$(dirname "$file")")
+        if [[ "$filename" == "copilot-instructions.md" ]]; then
+            # For copilot-instructions.md, remove the .github/copilot-instructions.md part
+            repo_path=$(dirname "$(dirname "$file")")
+        else
+            # For GEMINI.md and AGENTS.md, remove the filename part
+            repo_path=$(dirname "$file")
+        fi
         repo_name=$(basename "$repo_path")
 
         echo "Processing: $file"
         echo "Repository: $repo_name"
+        echo "Filename: $filename"
 
         # Create directory for this repo
         target_dir="from/$repo_name"
         mkdir -p "$target_dir"
 
-        # Copy the file
-        cp "$file" "$target_dir/copilot-instructions.md"
+        # Copy the file with its original name
+        cp "$file" "$target_dir/$filename"
 
-        echo "Copied to: $target_dir/copilot-instructions.md"
+        echo "Copied to: $target_dir/$filename"
         echo
     fi
-done <<< "$files"
+done <<< "$all_files"
 
 # Set description for the revset if it's not empty
 if [[ -n $(jj diff -s) ]]; then
