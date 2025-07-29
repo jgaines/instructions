@@ -39,13 +39,13 @@ This repository follows these organization principles:
 - Don't leave temporary files laying around
 
 ## Version Control
+This project uses Jujutsu for version control.
 
-This repository uses Jujutsu (jj) in colocated mode on top of git:
-- Before making any changes, create a new revset:
-    ```shell
-    jj new
-    jj desc -m "description"  --author "copilot <copilot@jgaines.com>"
-    ```
+### Workflow
+- After every prompt/change, run `jj status` to check for modifications
+- If changes are detected, commit them with: `jj commit -m "description" --author "copilot <copilot@jgaines.com>"`
+- Use descriptive commit messages that explain what was changed
+- Follow conventional commit format when possible
 
 ## Security Considerations
 
