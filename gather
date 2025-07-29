@@ -19,14 +19,29 @@ mkdir -p from
 # Find all target files
 echo "Searching for copilot-instructions.md, GEMINI.md, and AGENTS.md files..."
 
+# Build list of existing directories to search
+search_dirs=()
+for dir in ~/bin ~/git ~/projects; do
+    if [[ -d "$dir" ]]; then
+        search_dirs+=("$dir")
+    fi
+done
+
+if [[ ${#search_dirs[@]} -eq 0 ]]; then
+    echo "No search directories found (~/bin, ~/git, ~/projects)"
+    exit 0
+fi
+
+echo "Searching in directories: ${search_dirs[*]}"
+
 # Search for copilot-instructions.md files in .github directories
-copilot_files=$(fd -H copilot-instructions.md ~/bin ~/git ~/projects | grep .github || true)
+copilot_files=$(fd -H copilot-instructions.md "${search_dirs[@]}" | grep .github || true)
 
-# Search for GEMINI.md files anywhere
-gemini_files=$(fd -H GEMINI.md ~/bin ~/git ~/projects || true)
+# Search for GEMINI.md files anywhere (excluding the from directory to avoid copying to itself)
+gemini_files=$(fd -H GEMINI.md "${search_dirs[@]}" | grep -v "/from/" || true)
 
-# Search for AGENTS.md files anywhere
-agents_files=$(fd -H AGENTS.md ~/bin ~/git ~/projects || true)
+# Search for AGENTS.md files anywhere (excluding the from directory to avoid copying to itself)
+agents_files=$(fd -H AGENTS.md "${search_dirs[@]}" | grep -v "/from/" || true)
 
 # Combine all files
 all_files=""
@@ -81,8 +96,14 @@ while IFS= read -r file; do
         target_dir="from/$repo_name"
         mkdir -p "$target_dir"
 
-        # Copy the file with its original name
-        cp "$file" "$target_dir/$filename"
+        # Copy the file with its original name (skip if it's the same file)
+        target_path="$target_dir/$filename"
+        if [[ "$(realpath "$file")" != "$(realpath "$target_path" 2>/dev/null || echo "$target_path")" ]]; then
+            cp "$file" "$target_dir/$filename"
+        else
+            echo "Skipping (same file): $file"
+            continue
+        fi
 
         echo "Copied to: $target_dir/$filename"
         echo
