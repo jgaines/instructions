@@ -35,7 +35,7 @@ fi
 echo "Searching in directories: ${search_dirs[*]}"
 
 # Search for copilot-instructions.md files in .github directories
-copilot_files=$(fd -H copilot-instructions.md "${search_dirs[@]}" | grep .github || true)
+instruction_files=$(fd -H -p -e md --full-path '/\.github/.*instructions' "${search_dirs[@]}" || true)
 
 # Search for GEMINI.md files anywhere (excluding the from directory to avoid copying to itself)
 gemini_files=$(fd -H GEMINI.md "${search_dirs[@]}" | grep -v "/from/" || true)
@@ -45,8 +45,8 @@ agents_files=$(fd -H AGENTS.md "${search_dirs[@]}" | grep -v "/from/" || true)
 
 # Combine all files
 all_files=""
-if [[ -n "$copilot_files" ]]; then
-    all_files="$copilot_files"
+if [[ -n "$instruction_files" ]]; then
+    all_files="$instruction_files"
 fi
 if [[ -n "$gemini_files" ]]; then
     if [[ -n "$all_files" ]]; then
@@ -77,10 +77,10 @@ while IFS= read -r file; do
     if [[ -n "$file" ]]; then
         # Get the filename
         filename=$(basename "$file")
-        
+
         # Extract repository name from path
-        if [[ "$filename" == "copilot-instructions.md" ]]; then
-            # For copilot-instructions.md, remove the .github/copilot-instructions.md part
+        if [[ "$file" == */.github/* ]]; then
+            # For anything in a .github directory, we need to go up two directories
             repo_path=$(dirname "$(dirname "$file")")
         else
             # For GEMINI.md and AGENTS.md, remove the filename part
