@@ -5,15 +5,24 @@ that can be used to guide AI agents in various tasks. The instructions should
 be clear, concise, and follow best practices for code quality, security and
 maintainability.
 
-## Source Control
+## Version Control
 
-This repository uses Jujutsu (jj) in colocated mode on top of git:
-- Before making changes confirm that the active revset is empty, `jj diff -s` should return nothing.
-- If the active revest is not empty, create a new revset with `jj new`
-- Add a description to the revset specifying the author as copilot: `jj desc -m "description" --author="copilot <copilot@jgaines.com>"`
+I prefer to use Jujutsu for version control.
 
+### Workflow
+
+- After every prompt/change, run jj status to check for modifications
+- If changes are detected, commit them with:
+
+  ```bash
+  jj commit -m 'description' --author 'copilot <copilot@jgaines.com>'
+  ```
+
+- Use descriptive commit messages that explain what was changed
+- Follow conventional commit format when possible
 
 ## General Guidelines
+
 - Always state in the chat window that you are following these instructions.
 - Always write clear, concise instructions and documentation.
 - Follow the project's coding style and naming conventions.
