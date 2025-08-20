@@ -85,3 +85,5 @@ search GitHub repositories using the following query:
   with `copilot-instructions.md`, once you get to the results, you can use the
   left sidebar to change the search to code and filter by language or other
   criteria.
+- [Agents.md](https://github.com/openai/agents.md) is an OpenAI page about
+  AGENTS.md files with a github search link.
